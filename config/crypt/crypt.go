@@ -1,6 +1,8 @@
 package crypt
 
-import "strings"
+import (
+	"strings"
+)
 
 func Encode(pw string) string {
 	replacedText := strings.ReplaceAll(pw, "a", "*")
