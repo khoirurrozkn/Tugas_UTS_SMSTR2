@@ -35,6 +35,7 @@ func Post(token entity.FieldUser){
 
 	if inputPost == 1 {
 		clear()
+		create:
 		fmt.Println("-----------------------------------------------")
 		fmt.Println("                  BUAT CERITA                  ")
 		fmt.Println("-----------------------------------------------")
@@ -49,6 +50,9 @@ func Post(token entity.FieldUser){
 			category = "Blog"
 		} else {
 			category = "Programming"
+		} else {
+			fmt.Println("pilih hanya 1 atau 2")
+			goto create
 		}
 
 		fmt.Println("Masukan judul")
