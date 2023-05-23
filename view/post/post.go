@@ -7,7 +7,7 @@ import (
 	"os/exec"
 	"time"
 	"utsstrukdat/controller/post"
-	"utsstrukdat/db"
+	"utsstrukdat/entity"
 )
 
 func clear() {
@@ -16,7 +16,7 @@ func clear() {
 	cmd.Run()
 }
 
-func Post(token db.FieldUser){
+func Post(token entity.FieldUser){
 	var inputPost int
 	var category string
 	var pilihCategory int
@@ -60,7 +60,7 @@ func Post(token db.FieldUser){
 		scanner.Scan()
 		body := scanner.Text()
 
-		dataPost := &db.FieldPost{
+		dataPost := &entity.FieldPost{
 			Author:   token.Username,
 			Category: category,
 			Title:    title,

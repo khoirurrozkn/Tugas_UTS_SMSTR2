@@ -2,47 +2,41 @@ package postModel
 
 import (
 	"utsstrukdat/db"
+	"utsstrukdat/entity"
 )
 
-func Find() *[]db.FieldPost {
-	var isipost *db.Post = &db.DataPost
-	temp := isipost.Next
+func Find() *[]entity.FieldPost {
+	isipost := db.DataPost.Next
 
-	var data []db.FieldPost
+	var data []entity.FieldPost
 
-	for temp != nil {
-		data = append(data, temp.Data)
-		temp = temp.Next
+	for isipost != nil {
+		data = append(data, isipost.Data)
+		isipost = isipost.Next
 	}
 
 	return &data
 }
 
-func FindOne(judul string) *db.FieldPost {
-	var isipost *db.Post = &db.DataPost
-	temp := isipost.Next
+func FindOne(judul string) *entity.FieldPost {
+	isipost := db.DataPost.Next
 
-	for temp != nil {
-		if temp.Data.Title == judul {
+	for isipost != nil {
+		if isipost.Data.Title == judul {
 
-			return &temp.Data
+			return &isipost.Data
 		}
-		temp = temp.Next
+		isipost = isipost.Next
 	}
 	
 	return nil
 }
 
-func Create(req *db.FieldPost){
-	var isipost *db.Post = &db.DataPost
+func Create(req *entity.FieldPost){
+	isipost := &db.DataPost
 
-	data := &db.Post{
-		Data: db.FieldPost{
-			Author: req.Author,
-			Category: req.Category,
-			Title: req.Title,
-			Body: req.Body,
-		},
+	data := &entity.Post{
+		Data: *req,
 	}
 
 	if isipost.Next == nil {
@@ -54,51 +48,41 @@ func Create(req *db.FieldPost){
 }
 
 func FindByTitleAndUpdate(title string, body string){
-	var isipost *db.Post = &db.DataPost
-	temp := isipost.Next
+	isipost := &db.DataPost
 
-	for temp != nil {
-		if temp.Data.Title == title {
+	for isipost.Next != nil {
+		if isipost.Data.Title == title {
 
-			temp.Data.Body = body
+			isipost.Data.Body = body
 			break
 		}
-		temp = temp.Next
+		isipost = isipost.Next
 	}
 }
 
 func FindByTitleAndDelete(title string){
-	var isipost *db.Post = &db.DataPost
+	isipost := &db.DataPost
 
-	after := isipost.Next
-	before := isipost
-
-	for after != nil {
-		if after.Data.Title == title {
-			if  after == isipost.Next {
-				isipost.Next = after.Next
-			}else{
-				before.Next = after.Next
-			}
+	for isipost.Next != nil {
+		if isipost.Next.Data.Title == title {
+			isipost.Next = isipost.Next.Next
 			break
 		}
-		before = after
-		after = after.Next
+		isipost = isipost.Next
 	}
 }
 
-func FindPostByCategory(category string) *[]db.FieldPost {
-	var isipost *db.Post = &db.DataPost
-	temp := isipost.Next
+func FindPostByCategory(category string) *[]entity.FieldPost {
+	isipost := db.DataPost.Next
 
-	var response []db.FieldPost
+	var response []entity.FieldPost
 
-	for temp != nil {
-		if temp.Data.Category == category {
+	for isipost != nil {
+		if isipost.Data.Category == category {
 
-			response = append(response, temp.Data)
+			response = append(response, isipost.Data)
 		}
-		temp = temp.Next
+		isipost = isipost.Next
 	}
 
 	return &response

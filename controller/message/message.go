@@ -1,12 +1,12 @@
 package messageController
 
 import (
-	"utsstrukdat/db"
 	"utsstrukdat/model/message"
 	"utsstrukdat/model/user"
+	"utsstrukdat/entity"
 )
 
-func ShowMessage(user string) *[]db.FieldMessage {
+func ShowMessage(user string) *[]entity.FieldMessage {
 
 	response := messageModel.FindMessage(user)
 

@@ -10,7 +10,7 @@ import (
 	"utsstrukdat/controller/post"
 	"utsstrukdat/controller/user"
 	"utsstrukdat/view/post"
-	"utsstrukdat/db"
+	"utsstrukdat/entity"
 )
 
 func clear() {
@@ -20,7 +20,7 @@ func clear() {
 }
 
 
-func Dashboard(token db.FieldUser){
+func Dashboard(token entity.FieldUser){
 	scanner := bufio.NewScanner(os.Stdin)
 	var category string
 	var pilihCategory int

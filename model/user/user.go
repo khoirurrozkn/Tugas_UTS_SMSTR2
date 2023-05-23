@@ -2,27 +2,27 @@ package userModel
 
 import (
 	"utsstrukdat/db"
+	"utsstrukdat/entity"
 )
 
-func FindOne(username string) db.FieldUser {
-	var userDB *db.User = &db.DataUser
-	current := userDB.Next
+func FindOne(username string) entity.FieldUser {
+	userDB := db.DataUser.Next
 
-	for current != nil {
-		if current.Data.Username == username {
-			return current.Data
+	for userDB != nil {
+		if userDB.Data.Username == username {
+			return userDB.Data
 		}
-		current = current.Next
+		userDB = userDB.Next
 	}
 
-	return db.FieldUser{}
+	return entity.FieldUser{}
 }
 
-func Create(req db.FieldUser) {
-	var userDB *db.User = &db.DataUser
+func Create(req entity.FieldUser) {
+	userDB := &db.DataUser
 
-	newUser := &db.User{
-		Data: db.FieldUser{
+	newUser := &entity.User{
+		Data: entity.FieldUser{
 			Username: req.Username,
 			Password: req.Password,
 		},
@@ -36,17 +36,16 @@ func Create(req db.FieldUser) {
 	}
 }
 
-func FindUserAndPost(username string) *[]db.FieldPost {
-	var postDB *db.Post = &db.DataPost
-	current := postDB.Next
+func FindUserAndPost(username string) *[]entity.FieldPost {
+	postDB := db.DataPost.Next
 
-	var response []db.FieldPost
+	var response []entity.FieldPost
 
-	for current != nil {
-		if current.Data.Author == username {
-			response = append(response, current.Data)
+	for postDB != nil {
+		if postDB.Data.Author == username {
+			response = append(response, postDB.Data)
 		}
-		current = current.Next
+		postDB = postDB.Next
 	}
 
 	return &response

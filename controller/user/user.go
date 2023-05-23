@@ -1,12 +1,12 @@
 package userController
 
 import (
-	"utsstrukdat/db"
 	"utsstrukdat/model/user"
 	"utsstrukdat/config/crypt"
+	"utsstrukdat/entity"
 )
 
-func Register(req db.FieldUser, verPassword string) int {
+func Register(req entity.FieldUser, verPassword string) int {
 
 	check := userModel.FindOne(req.Username)
 
@@ -26,7 +26,7 @@ func Register(req db.FieldUser, verPassword string) int {
 	
 }
 
-func Login(req db.FieldUser) db.FieldUser {
+func Login(req entity.FieldUser) entity.FieldUser {
 
 	check := userModel.FindOne(req.Username)
 	
@@ -34,10 +34,10 @@ func Login(req db.FieldUser) db.FieldUser {
 		return check
 	}
 	check.Password = crypt.Encode(check.Password)
-	return db.FieldUser{}
+	return entity.FieldUser{}
 }
 
-func ShowPostByAccount(username string) *[]db.FieldPost {
+func ShowPostByAccount(username string) *[]entity.FieldPost {
 
 	check := userModel.FindOne(username)
 

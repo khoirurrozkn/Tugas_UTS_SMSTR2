@@ -1,15 +1,15 @@
 package postController
 
 import (
-	"utsstrukdat/db"
 	"utsstrukdat/model/post"
+	"utsstrukdat/entity"
 )
-func ShowPost() *[]db.FieldPost {
+func ShowPost() *[]entity.FieldPost {
 	
 	return postModel.Find()
 }
 
-func InsertPost(req *db.FieldPost) int {
+func InsertPost(req *entity.FieldPost) int {
 	check := postModel.FindOne(req.Title)
 
 	if check != nil {
@@ -50,7 +50,7 @@ func DeletePost(title string, author string) int {
 	return 404
 }
 
-func ShowByCategory(category string) *[]db.FieldPost {
+func ShowByCategory(category string) *[]entity.FieldPost {
 
 	response := postModel.FindPostByCategory(category)
 

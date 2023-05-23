@@ -8,7 +8,7 @@ import (
 	"time"
 	"utsstrukdat/controller/user"
 	"utsstrukdat/view/dashboard"
-	"utsstrukdat/db"
+	"utsstrukdat/entity"
 )
 
 func clear() {
@@ -54,7 +54,7 @@ func main() {
 			scanner.Scan()
 			verPassword := scanner.Text()
 
-			dataUser := db.FieldUser{
+			dataUser := entity.FieldUser{
 				Username: username,
 				Password: password,
 			}
@@ -85,7 +85,7 @@ func main() {
 			scanner.Scan()
 			password := scanner.Text()
 
-			dataUser := db.FieldUser{
+			dataUser := entity.FieldUser{
 				Username: username,
 				Password: password,
 			}
