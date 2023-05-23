@@ -48,7 +48,7 @@ func Post(token entity.FieldUser){
 
 		if pilihCategory == 1 {
 			category = "Blog"
-		} else {
+		} else if pilihCategory == 2 {
 			category = "Programming"
 		} else {
 			fmt.Println("Pilihan hanya 1 ataua 2")
